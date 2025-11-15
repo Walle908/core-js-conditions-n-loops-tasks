@@ -127,8 +127,13 @@ function canQueenCaptureKing(queen, king) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  let result = false;
+  if (!a || !b || !c) return result;
+  if (a === b && a + b > c) result = true;
+  if (a === c && a + c > b) result = true;
+  if (b === c && b + c > a) result = true;
+  return result;
 }
 
 /**
@@ -145,8 +150,27 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const romanNumb = [
+    ['X', 10],
+    ['IX', 9],
+    ['V', 5],
+    ['IV', 4],
+    ['I', 1],
+  ];
+  let number = num;
+  let result = '';
+
+  for (let i = 0; i < romanNumb.length; i += 1) {
+    const value = romanNumb[i][1];
+    const key = romanNumb[i][0];
+    while (number >= value) {
+      result += key;
+      number -= value;
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -164,8 +188,57 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let resultSpaceEnded = '';
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '0':
+        resultSpaceEnded += 'zero ';
+        break;
+      case '1':
+        resultSpaceEnded += 'one ';
+        break;
+      case '2':
+        resultSpaceEnded += 'two ';
+        break;
+      case '3':
+        resultSpaceEnded += 'three ';
+        break;
+      case '4':
+        resultSpaceEnded += 'four ';
+        break;
+      case '5':
+        resultSpaceEnded += 'five ';
+        break;
+      case '6':
+        resultSpaceEnded += 'six ';
+        break;
+      case '7':
+        resultSpaceEnded += 'seven ';
+        break;
+      case '8':
+        resultSpaceEnded += 'eight ';
+        break;
+      case '9':
+        resultSpaceEnded += 'nine ';
+        break;
+      case '-':
+        resultSpaceEnded += 'minus ';
+        break;
+      case '.':
+      case ',':
+        resultSpaceEnded += 'point ';
+        break;
+      default:
+        resultSpaceEnded += '';
+    }
+  }
+
+  for (let i = 0; i < resultSpaceEnded.length - 1; i += 1) {
+    result += resultSpaceEnded[i];
+  }
+  return result;
 }
 
 /**
