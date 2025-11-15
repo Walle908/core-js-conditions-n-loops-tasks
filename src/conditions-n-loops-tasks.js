@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -38,8 +38,11 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let maxNum = a;
+  if (maxNum < b) maxNum = b;
+  if (maxNum < c) maxNum = c;
+  return maxNum;
 }
 
 /**
@@ -61,8 +64,49 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  let result = false;
+  let queenX = queen.x;
+  let queenY = queen.y;
+  const queenDiagonalMoves = [];
+
+  while (queenX <= 8 && queenY <= 8) {
+    queenDiagonalMoves.push({ x: queenX, y: queenY });
+    queenX += 1;
+    queenY += 1;
+  }
+
+  queenX = queen.x;
+  queenY = queen.y;
+  while (queenX > 0 && queenY <= 8) {
+    queenDiagonalMoves.push({ x: queenX, y: queenY });
+    queenX -= 1;
+    queenY += 1;
+  }
+
+  queenX = queen.x;
+  queenY = queen.y;
+  while (queenX <= 8 && queenY <= 0) {
+    queenDiagonalMoves.push({ x: queenX, y: queenY });
+    queenX += 1;
+    queenY -= 1;
+  }
+
+  queenX = queen.x;
+  queenY = queen.y;
+  while (queenX > 0 && queenY > 0) {
+    queenDiagonalMoves.push({ x: queenX, y: queenY });
+    queenX -= 1;
+    queenY -= 1;
+  }
+
+  if (queen.x === king.x || queen.y === king.y) result = true;
+
+  queenDiagonalMoves.forEach((item) => {
+    if (item.x === king.x && item.y === king.y) result = true;
+  });
+
+  return result;
 }
 
 /**
